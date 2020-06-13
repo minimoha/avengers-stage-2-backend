@@ -1,21 +1,14 @@
 const Validator = require('validator')
 const isEmpty = require('./isEmpty')
 
-module.exports = function validateRegisterInput (data) {
+module.exports = function validateChangeInput (data) {
   let errors = {}
 
   for (const param in data) {
     data[param] = data[param].trim()
   }
+  const { password, confirmPassword } = data;
 
-  const { email, password, confirmPassword } = data;
-
-  if (!email || Validator.isEmpty(email)) {
-    errors.email = 'Email field is required'
-  } else if (!Validator.isEmail(email)) {
-    errors.email = 'Email is invalid'
-  }
-  
   if (!password || Validator.isEmpty(password)) {
     errors.password = 'Password is required'
   } else if (!Validator.isLength(password, { min: 6, max: 30 })) {
